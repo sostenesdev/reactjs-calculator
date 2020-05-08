@@ -1,9 +1,48 @@
 function CalculadoraService(){
+
+    const SOMA = '+';
+    const SUBTRACAO = '-';
+    const DIVISAO = '/';
+    const MULTIPLICACAO = '*';
     function calcular(numero1, numero2, operacao){
-        return 0;
+        let resultado = 0;
+        switch(operacao){
+            case SOMA:
+                resultado = numero1 + numero2;
+                break;
+            case SUBTRACAO:
+                    resultado = numero1 - numero2;
+                    break;
+            case DIVISAO:
+                resultado = numero1 / numero2;
+                break;
+            case MULTIPLICACAO:
+                resultado = numero1 * numero2;
+                break;
+            default:
+                resultado =0;
+        }
+        return resultado;
     }
 
-    return [calcular];
+
+    function concatenarNumero(numAtual, numConcat){
+        if(numAtual===0 || numAtual === null){
+            numAtual ='';
+        }
+
+        if(numConcat === '.' && numAtual === ''){
+            return '0.';
+        }
+
+        if(numConcat === '.' && numAtual.indexOf('.')>-1){
+            return numAtual;
+        }
+
+        return numAtual + numConcat;
+    }
+
+    return [calcular,concatenarNumero,SOMA,SUBTRACAO,DIVISAO, MULTIPLICACAO];
     
 }
 
