@@ -1,16 +1,45 @@
 import React, {useState} from 'react';
 import './calculadora.css';
 import {Jumbotron, Container, Row, Col,Button, Form} from 'react-bootstrap';
+import CalculadoraService from './calculadora.service';
 
 function Calculadora() {
+
+  const [calcular, concatenarNumero, SOMA, SUBTRACAO,DIVISAO, MULTIPLICACAO] = CalculadoraService();
   const [txtNumeros, setTxtNumeros] = useState('0');
+  const [numero1, setNumero1] = useState(0);
+  const [numero2, setNumero2] = useState(null);
+  const [operacao, setOperacao] = useState(null);
 
   function adicionarNumero(numero){
-    setTxtNumeros(txtNumeros+numero);
+    let resultado;
+    if(operacao === null){
+      resultado = concatenarNumero(numero1,numero);
+      setNumero1(resultado);
+    }else{
+      resultado = concatenarNumero(numero2, numero);
+      setNumero2(resultado);
+    }
+    setTxtNumeros(resultado);
+    
   }
 
-  function definirOperacao(operacao){
-    setTxtNumeros(txtNumeros+operacao);
+  function definirOperacao(op){
+    if(operacao === null){
+      console.log(op);
+      setOperacao(op);
+      return;
+    }
+
+    if(numero2 !== null){
+      const resultado = calcular(parseFloat(numero1), parseFloat(numero2), operacao);
+      console.log(resultado);
+      console.log(op);
+      setOperacao(op);
+      setNumero1(resultado.toString());
+      setNumero2(null);
+      setTxtNumeros(resultado.toString());
+    }
   }
 
   return (
@@ -62,7 +91,7 @@ function Calculadora() {
                 </Row>
                 <Row>
                   <Col><Button variant="light" onClick={()=>adicionarNumero(0)}>0</Button></Col>
-                  <Col><Button variant="light" onClick={()=>definirOperacao('.')} >.</Button></Col>
+                  <Col><Button variant="light" onClick={()=>adicionarNumero('.')} >.</Button></Col>
                   <Col><Button variant="success" onClick={()=>definirOperacao('=')} >=</Button></Col>
                   <Col><Button variant="warning" onClick={()=>definirOperacao('+')} >+</Button></Col>
                 </Row>

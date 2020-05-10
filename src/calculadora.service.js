@@ -36,6 +36,7 @@ function CalculadoraService(){
         }
 
         if(numConcat === '.' && numAtual.indexOf('.')>-1){
+            console.log("dois pontos???");
             return numAtual;
         }
 
