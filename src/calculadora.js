@@ -42,6 +42,25 @@ function Calculadora() {
     }
   }
 
+  function acaoCalcular(){
+    if(numero2 === null){
+      return;
+    }
+    const resultado = calcular(parseFloat(numero1),parseFloat(numero2), operacao);
+    setOperacao(null);
+    setNumero1(resultado.toString());
+    setNumero2(null);
+    setTxtNumeros(resultado.toString());
+  }
+
+  function acaoLimpar(){
+
+    setNumero1('0');
+    setTxtNumeros('0');
+    setNumero2(null);
+    setOperacao(null);
+  }
+
   return (
     <Container fluid style={{backgroundColor:"#ccc"}}>
        <Row className="justify-content-md-center">
@@ -56,7 +75,7 @@ function Calculadora() {
               <Container>
                 <Row>
                   <Col xs="3">
-                    <Button variant="danger">C</Button>
+                    <Button variant="danger" onClick={()=>acaoLimpar()} >C</Button>
                   </Col>
                   <Col xs="9">
                     <Form.Control type="text"
@@ -92,7 +111,7 @@ function Calculadora() {
                 <Row>
                   <Col><Button variant="light" onClick={()=>adicionarNumero(0)}>0</Button></Col>
                   <Col><Button variant="light" onClick={()=>adicionarNumero('.')} >.</Button></Col>
-                  <Col><Button variant="success" onClick={()=>definirOperacao('=')} >=</Button></Col>
+                  <Col><Button variant="success" onClick={()=>acaoCalcular()}>=</Button></Col>
                   <Col><Button variant="warning" onClick={()=>definirOperacao('+')} >+</Button></Col>
                 </Row>
               </Container>
