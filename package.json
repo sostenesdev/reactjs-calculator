@@ -1,5 +1,6 @@
 {
   "name": "calculadora",
+  "homepage": "http://localhost/calculadora/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
