@@ -81,7 +81,8 @@ function Calculadora() {
                     <Form.Control type="text"
                       name="txtNumeros"
                       className="text-right"
-                      readOnly="readOnly" value={txtNumeros}/>
+                      readOnly="readOnly" value={txtNumeros} 
+                      data-testid="txtNumeros" />
                     </Col>
                 </Row>
                 <Row>
